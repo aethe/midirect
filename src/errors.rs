@@ -1,9 +1,8 @@
 use std::{
     error::Error,
-    fmt::{Display, Formatter, Result},
+    fmt::{Debug, Display, Formatter, Result},
 };
 
-#[derive(Debug)]
 pub struct GenericError {
     pub message: String,
 }
@@ -14,9 +13,15 @@ impl GenericError {
     }
 }
 
+impl Debug for GenericError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.write_str(&self.message)
+    }
+}
+
 impl Display for GenericError {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        self.message.fmt(f)
+        f.write_str(&self.message)
     }
 }
 
