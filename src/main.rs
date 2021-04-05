@@ -8,13 +8,28 @@ use errors::GenericError;
 use fs::Config;
 use mapping::Mapping;
 use midi::MidiReader;
-use std::io::{stdin, Read};
+use std::{
+    env,
+    io::{stdin, Read},
+};
 
 fn main() -> Result<(), GenericError> {
-    let config = fs::read_from_file("rsc/config.json")?;
+    // get the file path of the config specified as the first argument
+    let config_file_path = env::args()
+        .collect::<Vec<String>>()
+        .get(1)
+        .ok_or(GenericError::new(
+            "no config file path specified".to_string(),
+        ))?
+        .clone();
+
+    // read the config
+    let config = fs::read_from_file(&config_file_path)?;
     let mapping = Mapping::from(&config)?;
 
+    // connect to a midi port
     let _midi_reader = MidiReader::new(move |input| {
+        // we expect at least 3 arguments in a midi message
         if input.len() < 3 {
             return;
         }
@@ -22,6 +37,7 @@ fn main() -> Result<(), GenericError> {
         // todo: find a way to share enigo between closure executions instead of creating a new instance every time
         let mut enigo = Enigo::new();
 
+        // translate the message based on the first 4 bits of its first argument
         match input[0] & 0b11110000 {
             // note off
             0b10000000 => {
@@ -48,10 +64,9 @@ fn main() -> Result<(), GenericError> {
         }
     })?;
 
+    // run until the user presses some key on the main keyboard
     println!("running");
     println!("press any key to exit");
-
-    // wait until some key is pressed
     let _ = stdin().read_exact(&mut [0u8]).unwrap();
 
     Ok(())
