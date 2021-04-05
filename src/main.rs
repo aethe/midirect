@@ -64,9 +64,9 @@ fn main() -> Result<(), GenericError> {
         }
     })?;
 
-    // run until the user presses some key on the main keyboard
+    // run until the user presses return
     println!("running");
-    println!("press any key to exit");
+    println!("press return to exit");
     let _ = stdin().read_exact(&mut [0u8]).unwrap();
 
     Ok(())
