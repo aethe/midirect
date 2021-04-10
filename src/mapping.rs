@@ -10,9 +10,7 @@ pub struct Mapping {
 impl Mapping {
     pub fn from(config: &Config) -> Result<Self, GenericError> {
         Ok(Self {
-            notes: Self::parse_config_hash_map(
-                config.notes.as_ref().unwrap_or(&HashMap::new())
-            )?,
+            notes: Self::parse_config_hash_map(config.notes.as_ref().unwrap_or(&HashMap::new()))?,
             controls: Self::parse_config_hash_map(
                 config.controls.as_ref().unwrap_or(&HashMap::new()),
             )?,
