@@ -10,8 +10,12 @@ pub struct Mapping {
 impl Mapping {
     pub fn from(config: &Config) -> Result<Self, GenericError> {
         Ok(Self {
-            notes: Self::parse_config_hash_map(&config.notes)?,
-            controls: Self::parse_config_hash_map(&config.controls)?,
+            notes: Self::parse_config_hash_map(
+                config.notes.as_ref().unwrap_or(&HashMap::new())
+            )?,
+            controls: Self::parse_config_hash_map(
+                config.controls.as_ref().unwrap_or(&HashMap::new()),
+            )?,
         })
     }
 
@@ -95,7 +99,7 @@ mod tests {
         controls.insert("62".to_string(), "b".to_string());
         controls.insert("63".to_string(), "shift".to_string());
 
-        let config = Config::new(notes, controls);
+        let config = Config::new(Some(notes), Some(controls));
         let mapping = Mapping::from(&config).unwrap();
 
         // test existing mappings
@@ -107,5 +111,13 @@ mod tests {
         // test missing mappings
         assert_eq!(mapping.notes.get(&64), None);
         assert_eq!(mapping.controls.get(&65), None);
+    }
+
+    #[test]
+    fn mapping_from_config_with_missing_fields() {
+        let config = Config::new(None, None);
+        let mapping = Mapping::from(&config).unwrap();
+        assert!(mapping.notes.is_empty());
+        assert!(mapping.controls.is_empty());
     }
 }
