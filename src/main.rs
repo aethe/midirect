@@ -41,13 +41,13 @@ fn main() -> Result<(), GenericError> {
         match input[0] & 0b11110000 {
             // note off
             0b10000000 => {
-                if let Some(&key) = mapping.keys.get(&input[1]) {
+                if let Some(&key) = mapping.notes.get(&input[1]) {
                     enigo.key_up(key);
                 }
             }
             // note on
             0b10010000 => {
-                if let Some(&key) = mapping.keys.get(&input[1]) {
+                if let Some(&key) = mapping.notes.get(&input[1]) {
                     enigo.key_down(key);
                 }
             }

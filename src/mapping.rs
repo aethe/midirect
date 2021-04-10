@@ -3,14 +3,14 @@ use enigo::Key;
 use std::collections::HashMap;
 
 pub struct Mapping {
-    pub keys: HashMap<u8, Key>,
+    pub notes: HashMap<u8, Key>,
     pub controls: HashMap<u8, Key>,
 }
 
 impl Mapping {
     pub fn from(config: &Config) -> Result<Self, GenericError> {
         Ok(Self {
-            keys: Self::parse_config_hash_map(&config.keys)?,
+            notes: Self::parse_config_hash_map(&config.notes)?,
             controls: Self::parse_config_hash_map(&config.controls)?,
         })
     }
@@ -23,7 +23,7 @@ impl Mapping {
             |mut result, next| -> Result<HashMap<u8, Key>, GenericError> {
                 result.insert(
                     next.0.parse::<u8>().map_err(|_| {
-                        GenericError::new(format!("could not parse the key {}", next.0))
+                        GenericError::new(format!("could not parse the note {}", next.0))
                     })?,
                     Self::parse_config_key(&next.1)?,
                 );
@@ -87,25 +87,25 @@ mod tests {
 
     #[test]
     fn mapping_from_config() {
-        let mut keys = HashMap::<String, String>::new();
-        keys.insert("60".to_string(), "a".to_string());
-        keys.insert("61".to_string(), "meta".to_string());
+        let mut notes = HashMap::<String, String>::new();
+        notes.insert("60".to_string(), "a".to_string());
+        notes.insert("61".to_string(), "meta".to_string());
 
         let mut controls = HashMap::<String, String>::new();
         controls.insert("62".to_string(), "b".to_string());
         controls.insert("63".to_string(), "shift".to_string());
 
-        let config = Config::new(keys, controls);
+        let config = Config::new(notes, controls);
         let mapping = Mapping::from(&config).unwrap();
 
         // test existing mappings
-        assert_eq!(mapping.keys.get(&60), Some(&Key::Layout('a')));
-        assert_eq!(mapping.keys.get(&61), Some(&Key::Meta));
+        assert_eq!(mapping.notes.get(&60), Some(&Key::Layout('a')));
+        assert_eq!(mapping.notes.get(&61), Some(&Key::Meta));
         assert_eq!(mapping.controls.get(&62), Some(&Key::Layout('b')));
         assert_eq!(mapping.controls.get(&63), Some(&Key::Shift));
 
         // test missing mappings
-        assert_eq!(mapping.keys.get(&64), None);
+        assert_eq!(mapping.notes.get(&64), None);
         assert_eq!(mapping.controls.get(&65), None);
     }
 }

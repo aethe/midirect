@@ -12,13 +12,13 @@ use std::{
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
-    pub keys: HashMap<String, String>,
+    pub notes: HashMap<String, String>,
     pub controls: HashMap<String, String>,
 }
 
 impl Config {
-    pub fn new(keys: HashMap<String, String>, controls: HashMap<String, String>) -> Self {
-        Self { keys, controls }
+    pub fn new(notes: HashMap<String, String>, controls: HashMap<String, String>) -> Self {
+        Self { notes, controls }
     }
 }
 
