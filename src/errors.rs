@@ -3,6 +3,7 @@ use std::{
     fmt::{Debug, Display, Formatter, Result},
 };
 
+#[derive(Debug)]
 pub struct GenericError {
     pub message: String,
 }
@@ -10,12 +11,6 @@ pub struct GenericError {
 impl GenericError {
     pub fn new(message: String) -> Self {
         Self { message }
-    }
-}
-
-impl Debug for GenericError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        f.write_str(&self.message)
     }
 }
 

@@ -13,7 +13,11 @@ use std::{
     io::{stdin, Read},
 };
 
-fn main() -> Result<(), GenericError> {
+fn main() {
+    let _ = run().map_err(|error| eprintln!("{}", error));
+}
+
+fn run() -> Result<(), GenericError> {
     // get the file path of the config specified as the first argument
     let config_file_path = env::args()
         .collect::<Vec<String>>()
