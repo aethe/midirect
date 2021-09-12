@@ -1,6 +1,6 @@
-# M2K
+# 🎹 Midirect
 
-Command-line tool that translates MIDI input into computer keyboard output in real time.
+Command-line tool that redirects MIDI input into computer keyboard output.
 
 ## Building
 
@@ -12,7 +12,7 @@ To build the app, run the following command from the root directory:
 cargo build --release
 ```
 
-This will generate a binary called `m2k` and store it in `./target/release/`.
+This will generate a binary called `midirect` and store it in `./target/release/`.
 
 ## Tutorial
 
@@ -58,7 +58,7 @@ Here is an example of mapping some piano keys to WASD and a sustain pedal to the
 Once you have your configuration file ready, pass it to the app as a command line argument:
 
 ```
-m2k config.json
+midirect config.json
 ```
 
 ## Limitations
