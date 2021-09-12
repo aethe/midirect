@@ -1,6 +1,6 @@
 # 🎹 Midirect
 
-Command-line tool that redirects MIDI input into computer keyboard output.
+Command-line tool that translates MIDI input as computer keyboard input in real time.
 
 ## Building
 
