@@ -1,6 +1,6 @@
-# project-2021-04-02
+# M2K
 
-This is a command-line tool that translates MIDI input into computer keyboard output in real time.
+Command-line tool that translates MIDI input into computer keyboard output in real time.
 
 ## Building
 
@@ -16,15 +16,15 @@ This will generate a binary called `m2k` and store it in `./target/release/`.
 
 ## Tutorial
 
-Prepare a configuration file. You can use the existing `./rsc/config.json` for inspiration.
+Prepare a configuration file which specifies which MIDI signals are mapped to which keyboard keys. You can use the existing `./rsc/config.json` for inspiration.
 
 The content of the configuration file should be a JSON with two parameters: `notes` and `controls`. 
 
-Entries in `notes` represent note on/off signals. Each note has a number between 0 and 127. This is the layout of notes on a 88-key piano:
+Entries in `notes` represent note on/off signals. Each note has a code between `0` and `127`. For reference, this is the layout of notes on a 88-key piano:
 
 ![Mapping of piano keys to midi signals](img/piano.png)
 
-Entries in `controls` are for control change events, like pressing a sustain pedal. Any non-zero value emitted by a control is mapped onto a key press, and zero is mapped onto a key release.
+Entries in `controls` are for control change events, like pressing a sustain pedal (code `64`). Any non-zero value emitted by a control is mapped to a key press, and zero is mapped to a key release.
 
 In both `notes` and `controls`, MIDI signals are mapped to keys on a computer keyboard. All possible values include keys represented by characters, such as `a` and `1`, as well as special keys from the following list:
 
@@ -65,3 +65,7 @@ m2k config.json
 
 - A MIDI device must be connected before starting the app.
 - Only a single MIDI device can be used at a time. If there are more MIDI devices, the app will pick one of them.
+
+## Compatibility
+
+- The app has only been tested on macOS Big Sur, but should potentially work on other operating systems as well.
