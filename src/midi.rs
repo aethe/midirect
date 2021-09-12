@@ -10,7 +10,7 @@ impl MidiReader {
     where
         F: Fn(&[u8]) + Send + 'static,
     {
-        let input = MidiInput::new("m2t-input")
+        let input = MidiInput::new("m2k-input")
             .map_err(|_| GenericError::new("could not start midi input".to_string()))?;
 
         let ports = input.ports();
@@ -21,7 +21,7 @@ impl MidiReader {
         let connection = input
             .connect(
                 port,
-                "m2t-input",
+                "m2k-input",
                 move |_, message, _| {
                     on_input(message);
                 },
