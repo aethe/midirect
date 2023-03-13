@@ -1,13 +1,13 @@
 [package]
 name = "midirect"
 version = "1.0.0"
-authors = ["Andrey Ufimcev <aethe.dev@gmail.com>"]
+authors = ["Andrey Ufimcev"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 enigo = { git = "https://github.com/enigo-rs/enigo.git", rev = "c4b5c0f8190e6570c9f8d1e84c85c537cfeab82a" }
-midir = "0.7.0"
+midir = "0.9.1"
 serde = { version = "1.0.125", features = ["derive"] }
 serde_json = "1.0.64"
