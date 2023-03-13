@@ -7,7 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-enigo = { git = "https://github.com/enigo-rs/enigo.git", rev = "43a016f36939a59e1f1874e07bf057d08c31913e" }
+enigo = { git = "https://github.com/enigo-rs/enigo.git", rev = "c4b5c0f8190e6570c9f8d1e84c85c537cfeab82a" }
 midir = "0.7.0"
 serde = { version = "1.0.125", features = ["derive"] }
 serde_json = "1.0.64"
