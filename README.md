@@ -16,7 +16,7 @@ This will generate a binary called `midirect` and store it in `./target/release/
 
 ## Tutorial
 
-Prepare a configuration file which specifies which MIDI signals are mapped to which keyboard keys. You can use the existing `./rsc/config.json` for inspiration.
+Prepare a configuration file which specifies which MIDI signals are mapped to which keyboard keys. You can use the existing `./rsc/alphabet.json` or `./rsc/arrows.json` configs for inspiration.
 
 The content of the configuration file should be a JSON with two parameters: `notes` and `controls`. 
 
