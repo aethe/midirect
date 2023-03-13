@@ -68,6 +68,4 @@ midirect config.json
 
 ## Compatibility
 
-- The app has been tested to work on macOS Big Sur.
-- On Windows there is a problem with [an underlying crate](https://github.com/enigo-rs/enigo/pull/100) causing incorrect mapping of page up/down and arrow keys.
-- Compatibility with other systems hasn't been tested yet.
+The app has been tested to work on Windows and macOS.
