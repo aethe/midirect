@@ -1,0 +1,11 @@
+{
+    "notes": {
+        "48": "left_arrow",
+        "50": "up_arrow",
+        "52": "right_arrow",
+        "53": "down_arrow"
+    },
+    "controls": {
+        "64": "space"
+    }
+}
